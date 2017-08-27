@@ -1,6 +1,10 @@
 import * as _ from 'lodash';
 
 class Web3Wrapper {
+  /**
+   * Constructor Web3 wrapper.
+   * @param web3 instance
+   */
   constructor(web3Provider) {
     this._web3 = web3Provider;
   }

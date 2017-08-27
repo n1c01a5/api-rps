@@ -10,41 +10,26 @@ test('RPS', async () => {
 
   let Web3WrapperInstance = await new Web3Wrapper(provider)
 
-  console.log(await Web3WrapperInstance.getAccount(0))
-
   let RPSContract = new RPSWrapper(Web3WrapperInstance)
-
-  // let addressRPSContract = await RPSContract.deploy()
-  let t = await RPSContract.deploy()
 
   let balance1 = await Web3WrapperInstance.getBalanceInWeiAsync()
 
   console.log('balance1', balance1)
-
-  let balance10 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
-
-  console.log('balance10', balance10)
-
-  console.log(t)
-
-  let balance11 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
-
-  console.log('balance11', balance11)
-
-  let balance2 = await Web3WrapperInstance.getBalanceInWeiAsync()
-
-  console.log('balance2', balance2)
-
-
   //
+  // let balance10 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
   //
+  // console.log('balance10', balance10)
   //
-  // console.log(tokenWeb3.getWeb3Wrapper().getCoinbase())
+  // let t = await RPSContract.deploy()
   //
-  // console.log(tokenWeb3.getWeb3Wrapper().getCoinbase())
-  // console.log(tokenWeb3.getWeb3Wrapper().getBalanceInWeiAsync())
+  // console.log(t)
+  //
+  // let contractBalance = await Web3WrapperInstance.getBalanceInWeiAsync(t)
+  //
+  // console.log('contractBalance', contractBalance)
+  //
+  // let balance11 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
+  //
+  // console.log('balance11', balance11)
 
-  // console.log(test1.getBalanceInWeiAsync())
-  // console.log(test1.getCoinbase())
-  // console.log(test1.getWeb3Wrapper)
 });

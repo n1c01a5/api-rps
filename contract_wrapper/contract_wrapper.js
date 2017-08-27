@@ -9,8 +9,8 @@ import config from '../config'
  */
 class ContractWrapper {
   /**
-   * Constructor
-   * @param web3 instance
+   * Constructor contract wrapper
+   * @param web3Wrapper instance
    */
   constructor(web3Wrapper) {
     this._web3Wrapper = web3Wrapper
@@ -79,6 +79,7 @@ class ContractWrapper {
       console.log(this._web3Wrapper)
       account = this._web3Wrapper.getAccount(0)
     }
+    
     const MyContract = contract({
       abi: artifact.abi,
       unlinked_binary: artifact.unlinked_binary,

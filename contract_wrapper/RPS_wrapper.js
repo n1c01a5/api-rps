@@ -29,7 +29,7 @@ class RPSWrapper extends ContractWrapper {
    */
   deploy = async (
       account = this._web3Wrapper.getAccount(0),
-      value = 10000,
+      value = 100000,
       c1Hash = config.C1_HASH_DEFAULT,
       addressP2 = this._web3Wrapper.getAccount(1)
     ) => {
@@ -42,6 +42,34 @@ class RPSWrapper extends ContractWrapper {
     )
     return addressContractDeployed
   }
+
+  /**
+   * To be called by j2 and provided stake.
+   * @param _c2 The move submitted by j2.
+   * @param value stake.
+   */
+  // play = async (move, value) => {
+  //   const MyContract = contract({
+  //     abi: RPS.abi,
+  //     unlinked_binary: RPS.unlinked_binary,
+  //   })
+  //
+  //   const provider = await this._web3Wrapper.getProvider()
+  //
+  //   MyContract.setProvider(provider)
+  //
+  //   let c = await MyContract.at(this.address)
+  //
+  //   c.play(
+  //     2,
+  //     {
+  //       from: this._web3Wrapper.getAccount(1),
+  //       value: 10000,
+  //       gas: config.GAS,
+  //     }
+  //   )
+  // }
+
 }
 
 export default RPSWrapper
