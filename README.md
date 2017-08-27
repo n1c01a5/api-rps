@@ -1,5 +1,5 @@
-KLEROS
-======
+RPS
+===
 
 ```
 yarn install
