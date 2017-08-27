@@ -12,8 +12,8 @@ class RPSWrapper extends ContractWrapper {
    * @param web3 instance
    * @param address of the contract (optionnal)
    */
-  constructor(web3Instance, address) {
-    super(web3Instance)
+  constructor(web3Provider, address) {
+    super(web3Provider)
     if (!_.isUndefined(address)) {
       this.address = address
     }
@@ -28,10 +28,10 @@ class RPSWrapper extends ContractWrapper {
    * @return  address | err The address of the contract or error deploy
    */
   deploy = async (
-      account = this._web3Wrapper.eth.accounts[0],
+      account = this._web3Wrapper.getAccount(0),
       value = 10000,
       c1Hash = config.C1_HASH_DEFAULT,
-      addressP2 = this._web3Wrapper.eth.accounts[1]
+      addressP2 = this._web3Wrapper.getAccount(1)
     ) => {
     const addressContractDeployed = await this._deployContractAsync(
       account,

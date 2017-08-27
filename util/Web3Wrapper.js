@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
 
 class Web3Wrapper {
-  constructor(web3Instance) {
-    this._web3 = web3Instance;
+  constructor(web3Provider) {
+    this._web3 = web3Provider;
   }
-
-  getWeb3 = () => this._web3
 
   isAddress = address => this._web3.isAddress(address)
 
   getAccount = index => this._web3.eth.accounts[index]
+
+  getProvider = () => this._web3.currentProvider
 
   getCoinbase = () => {
     return this._web3.eth.coinbase;

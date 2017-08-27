@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import contract from 'truffle-contract'
-import {provider} from '../util/web3Instance'
+import web3Wrapper from '../util/web3Wrapper'
 import RPS from '../artifact/RPS.json'
 import config from '../config'
 
@@ -12,8 +12,8 @@ class ContractWrapper {
    * Constructor
    * @param web3 instance
    */
-  constructor(web3Instance) {
-    this._web3Wrapper = web3Instance
+  constructor(web3Wrapper) {
+    this._web3Wrapper = web3Wrapper
   }
 
   /**
@@ -25,7 +25,7 @@ class ContractWrapper {
   _instantiateContractIfExistsAsync = async (artifact, address) => {
     const c = await contract(artifact)
 
-    const providerObj = this._web3Wrapper.getCurrentProvider()
+    const providerObj = this._web3Wrapper.getProvider()
 
     c.setProvider(providerObj)
 
@@ -76,14 +76,15 @@ class ContractWrapper {
    */
   _deployContractAsync = async (account, value, artifact, ...args) => {
     if (_.isUndefined(account)) {
-      account = this._web3Wrapper.eth.accounts[0]
+      console.log(this._web3Wrapper)
+      account = this._web3Wrapper.getAccount(0)
     }
     const MyContract = contract({
       abi: artifact.abi,
       unlinked_binary: artifact.unlinked_binary,
     })
 
-    const provider = await this._web3Wrapper.currentProvider
+    const provider = await this._web3Wrapper.getProvider()
 
     MyContract.setProvider(provider)
 
@@ -103,4 +104,4 @@ class ContractWrapper {
   }
 }
 
-export default ContractWrapper;
+export default ContractWrapper

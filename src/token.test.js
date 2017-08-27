@@ -2,16 +2,17 @@
 import RPSWrapper from '../contract_wrapper/RPS_wrapper'
 import Web3 from 'web3'
 import contract from 'truffle-contract'
-import web3Instance from '../util/web3Instance'
+import web3Provider from '../util/web3Provider'
 import Web3Wrapper from '../util/Web3Wrapper'
 
+test('RPS', async () => {
+  let provider = await web3Provider()
 
+  let Web3WrapperInstance = await new Web3Wrapper(provider)
 
-test('TokenWeb3', async () => {
-  const web3 = await web3Instance()
-  const Web3WrapperInstance = new Web3Wrapper(web3)
+  console.log(await Web3WrapperInstance.getAccount(0))
 
-  let RPSContract = new RPSWrapper(Web3WrapperInstance.getWeb3())
+  let RPSContract = new RPSWrapper(Web3WrapperInstance)
 
   // let addressRPSContract = await RPSContract.deploy()
   let t = await RPSContract.deploy()
