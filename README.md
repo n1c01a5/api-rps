@@ -1,6 +1,8 @@
 KLEROS
 ======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/n1c01a5/api-rps.svg)](https://greenkeeper.io/)
+
 ```
 yarn install
 ```
