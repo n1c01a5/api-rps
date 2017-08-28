@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 import ContractWrapper from './contract_wrapper'
 import RPS from '../artifact/RPS.json'
+import contract from 'truffle-contract'
 import config from '../config'
 
 /**
@@ -40,6 +41,7 @@ class RPSWrapper extends ContractWrapper {
       c1Hash,
       addressP2,
     )
+
     return addressContractDeployed
   }
 
@@ -48,27 +50,15 @@ class RPSWrapper extends ContractWrapper {
    * @param _c2 The move submitted by j2.
    * @param value stake.
    */
-  // play = async (move, value) => {
-  //   const MyContract = contract({
-  //     abi: RPS.abi,
-  //     unlinked_binary: RPS.unlinked_binary,
-  //   })
-  //
-  //   const provider = await this._web3Wrapper.getProvider()
-  //
-  //   MyContract.setProvider(provider)
-  //
-  //   let c = await MyContract.at(this.address)
-  //
-  //   c.play(
-  //     2,
-  //     {
-  //       from: this._web3Wrapper.getAccount(1),
-  //       value: 10000,
-  //       gas: config.GAS,
-  //     }
-  //   )
-  // }
+  play = async (c) => {
+    //const RPSinstance = await this._instantiateContractIfExistsAsync(RPS,address)
+
+
+
+
+
+    return d
+  }
 
 }
 

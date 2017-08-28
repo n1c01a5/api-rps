@@ -29,11 +29,16 @@ class ContractWrapper {
 
     c.setProvider(providerObj)
 
-    const networkIdIfExists = await this._web3Wrapper.getNetworkIdIfExistsAsync()
+    const networkIdIfExists = await this._web3Wrapper._getNetworkIdIfExistsAsync()
+
+
+
     const artifactNetworkConfigs = _.isUndefined(networkIdIfExists) ?
                                    undefined :
-                                   artifact.networks[networkIdIfExists]
+                                   artifact.networks[networkIdIfExists] // TODO fix
+
     let contractAddress
+
 
     if (!_.isUndefined(address)) {
       contractAddress = address
@@ -49,10 +54,15 @@ class ContractWrapper {
       }
     }
 
+    console.log(address)
+
     try {
       const contractInstance = _.isUndefined(address)
                               ? await c.deployed()
                               : await c.at(address)
+
+
+
 
       return contractInstance;
     } catch (err) {
@@ -79,7 +89,7 @@ class ContractWrapper {
       console.log(this._web3Wrapper)
       account = this._web3Wrapper.getAccount(0)
     }
-    
+
     const MyContract = contract({
       abi: artifact.abi,
       unlinked_binary: artifact.unlinked_binary,
@@ -98,7 +108,17 @@ class ContractWrapper {
           gas: config.GAS,
         }
       )
-      return contractDeployed.address
+
+      const contractDeployed2 = await contractDeployed.play(
+        2,
+        {
+          from: this._web3Wrapper.getAccount(1),
+          value: value,
+          gas: config.GAS,
+        }
+      )
+
+      return contractDeployed2
     } catch (e) {
       throw new Error(e)
     }

@@ -27,24 +27,23 @@ class Web3Wrapper {
     return !codeIsEmpty;
   }
 
-  getNetworkIdIfExistsAsync = async () => {
+  _getNetworkIdIfExistsAsync = async () => {
     if (!_.isUndefined(this.networkIdIfExists)) {
       return this.networkIdIfExists;
     }
 
     try {
-      const networkId = await this.getNetworkAsync();
+      const networkId = await this._getNetworkAsync();
 
       this.networkIdIfExists = Number(networkId);
       return this.networkIdIfExists;
     } catch (err) {
-
       return undefined;
     }
   }
 
   _getNetworkAsync = async () => {
-    const networkId = await this._web3.version.getNetwork();
+    const networkId = await this._web3.version.network
 
     return networkId;
   }
