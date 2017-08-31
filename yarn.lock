@@ -1692,7 +1692,7 @@ esutils@^2.0.0, esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
-ethereumjs-testrpc@^4.1.0:
+ethereumjs-testrpc@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ethereumjs-testrpc/-/ethereumjs-testrpc-4.1.1.tgz#ea4af03ff24463dead1116404d25083b4bf869a6"
   dependencies:
@@ -3118,10 +3118,6 @@ pretty-format@^20.0.3:
 private@^0.1.6, private@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.7.tgz#68ce5e8a1ef0a23bb570cc28537b5332aba63ef1"
-
-process-env@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/process-env/-/process-env-1.1.0.tgz#c810f5ae72cd9a9b20b42553ccf30957ea4d739e"
 
 process-nextick-args@~1.0.6:
   version "1.0.7"

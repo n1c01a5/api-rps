@@ -61,9 +61,6 @@ class ContractWrapper {
                               ? await c.deployed()
                               : await c.at(address)
 
-
-
-
       return contractInstance;
     } catch (err) {
       const errMsg = `${err}`
@@ -86,7 +83,6 @@ class ContractWrapper {
    */
   _deployContractAsync = async (account, value, artifact, ...args) => {
     if (_.isUndefined(account)) {
-      console.log(this._web3Wrapper)
       account = this._web3Wrapper.getAccount(0)
     }
 
@@ -109,16 +105,7 @@ class ContractWrapper {
         }
       )
 
-      const contractDeployed2 = await contractDeployed.play(
-        2,
-        {
-          from: this._web3Wrapper.getAccount(1),
-          value: value,
-          gas: config.GAS,
-        }
-      )
-
-      return contractDeployed2
+      return contractDeployed
     } catch (e) {
       throw new Error(e)
     }

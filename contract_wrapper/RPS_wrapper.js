@@ -42,24 +42,27 @@ class RPSWrapper extends ContractWrapper {
       addressP2,
     )
 
+    this.contractInstance = addressContractDeployed
+
     return addressContractDeployed
   }
 
-  /**
-   * To be called by j2 and provided stake.
-   * @param _c2 The move submitted by j2.
-   * @param value stake.
-   */
-  play = async (c) => {
-    //const RPSinstance = await this._instantiateContractIfExistsAsync(RPS,address)
+  play = async (contractD) => {
+    try {
+      const contractDeployed2 = await contractD.play(
+        2,
+        {
+          from: this._web3Wrapper.getAccount(1),
+          value: 100000,
+          gas: config.GAS,
+        }
+      )
 
-
-
-
-
-    return d
+      return contractDeployed2
+    } catch (e) {
+      throw new Error(e)
+    }
   }
-
 }
 
 export default RPSWrapper

@@ -1,32 +1,41 @@
-/* global describe, it, before */
 import RPSWrapper from '../contract_wrapper/RPS_wrapper'
 import Web3 from 'web3'
 import contract from 'truffle-contract'
-import web3Provider from '../util/web3Provider'
 import Web3Wrapper from '../util/Web3Wrapper'
 
-test('RPS', async () => {
-  let provider = await web3Provider()
+let Web3WrapperInstance
 
-  let Web3WrapperInstance = await new Web3Wrapper(provider)
+beforeAll(async () => {
+  // use testRPC
+  const provider = await new Web3.providers.HttpProvider('http://localhost:8545')
 
-  let RPSContract = new RPSWrapper(Web3WrapperInstance)
+  Web3WrapperInstance = await new Web3Wrapper(provider)
 
-  let balance1 = await Web3WrapperInstance.getBalanceInWeiAsync()
+  return Web3WrapperInstance
+})
 
-  console.log('balance1', balance1)
+describe('RPS', () => {
 
-  let balance10 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
+  let balanceAccount0
+  let balanceAccount1
 
-  console.log('balance10', balance10)
+  test('get account 0 balance', async () => {
+    balanceAccount0 = await Web3WrapperInstance.getBalanceInWeiAsync()
+    expect(typeof balanceAccount0).toBe('string');
+  })
 
-  let t = await RPSContract.deploy()
+  test('get account 1 balance', async () => {
+    balanceAccount1 = await Web3WrapperInstance.getBalanceInWeiAsync(Web3WrapperInstance.getAccount(1))
+    expect(typeof balanceAccount1).toBe('string');
+  })
 
-  console.log('t',t)
+  // deploy contract, play rock
+  test('play RPS', async () => {
+    let RPSContractInstance = new RPSWrapper(Web3WrapperInstance)
+    let RPSContractDeployed = await RPSContractInstance.deploy()
+    expect(typeof RPSContractDeployed).toBe('object')
 
-  let p = await RPSContract.play()
-
-  console.log('p',p)
-
-
-});
+    let p2Play = await RPSContractInstance.play(RPSContractDeployed)
+    expect(p2Play.tx).toBeDefined()
+  })
+})
