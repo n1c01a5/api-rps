@@ -54,8 +54,6 @@ class ContractWrapper {
       }
     }
 
-    console.log(address)
-
     try {
       const contractInstance = _.isUndefined(address)
                               ? await c.deployed()

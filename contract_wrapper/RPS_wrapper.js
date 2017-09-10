@@ -18,6 +18,8 @@ class RPSWrapper extends ContractWrapper {
     if (!_.isUndefined(address)) {
       this.address = address
     }
+    this.stake = 0
+    this.contractInstance = null
   }
 
   /**
@@ -30,35 +32,64 @@ class RPSWrapper extends ContractWrapper {
    */
   deploy = async (
       account = this._web3Wrapper.getAccount(0),
-      value = 100000,
+      value = config.VALUE,
       c1Hash = config.C1_HASH_DEFAULT,
       addressP2 = this._web3Wrapper.getAccount(1)
     ) => {
+
+    this.stake = value
+
     const addressContractDeployed = await this._deployContractAsync(
       account,
       value,
       RPS,
       c1Hash,
-      addressP2,
+      addressP2
     )
 
     this.contractInstance = addressContractDeployed
 
-    return addressContractDeployed
+    return this.contractInstance
   }
 
-  play = async (contractD) => {
+  play = async (
+    moveC2,
+    account = this._web3Wrapper.getAccount(1)
+  ) => {
     try {
-      const contractDeployed2 = await contractD.play(
-        2,
+      const playTx = await this.contractInstance.play(
+        moveC2,
         {
-          from: this._web3Wrapper.getAccount(1),
-          value: 100000,
-          gas: config.GAS,
+          from: account,
+          value: this.stake,
+          gas: config.GAS
         }
       )
 
-      return contractDeployed2
+      return playTx
+    } catch (e) {
+      throw new Error(e)
+    }
+  }
+
+  solve = async (
+    moveC1,
+    salt,
+    account = this._web3Wrapper.getAccount(0),
+  ) => {
+    try {
+      const solve = await this.contractInstance.solve(
+        moveC1,
+        salt,
+        {
+          from: account,
+          gas: config.GAS
+        }
+      )
+
+      this.stake = 0
+
+      return solve
     } catch (e) {
       throw new Error(e)
     }
