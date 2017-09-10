@@ -1,7 +1,7 @@
 {
   "name": "api-rps",
   "version": "0.3.0",
-  "description": "Kleros API",
+  "description": "RPS API",
   "main": "lib/api-rps.js",
   "scripts": {
     "build": "webpack --env build",
@@ -32,8 +32,8 @@
     "url": "https://github.com/n1c01a5/api-rps"
   },
   "keywords": [
-    "kleros",
-    "decentralized court"
+    "RPS",
+    "Ethereum"
   ],
   "author": "Wagner Nicolas",
   "license": "MIT",
