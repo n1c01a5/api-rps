@@ -1,6 +1,6 @@
 {
   "name": "api-rps",
-  "version": "0.3.0",
+  "version": "0.0.1",
   "description": "RPS API",
   "main": "lib/api-rps.js",
   "scripts": {
